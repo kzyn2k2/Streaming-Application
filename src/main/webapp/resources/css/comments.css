@@ -1,0 +1,17 @@
+@charset "ISO-8859-1";
+
+.comment-section {
+  position: relative;
+}
+
+.comments {
+  height: 500px; 
+  overflow-y: auto;
+}
+
+.comment-form-container {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  padding: 10px;
+}

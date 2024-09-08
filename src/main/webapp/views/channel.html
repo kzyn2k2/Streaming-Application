@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Channel</title>
+<link rel="stylesheet" th:href="@{/resources/css/bootstrap.min.css}" />
+<link href="https://vjs.zencdn.net/8.3.0/video-js.css" rel="stylesheet" />
+
+</head>
+<body>
+	<div class="container-fluid">
+		<nav th:replace="~{frag :: nav(name = ${u})}"></nav>
+		<div class="row mt-3">
+			<div class="col">
+				<h3 class="ms-3" th:text="${channel.getName()}"></h3>
+				<div class="row">
+					<div class="col-8">
+						<div style="width: 900px; height: 600px;" class="text-center">
+						<video class="video-js vjs-fluid" preload="auto" data-setup='{}' controls controlsList="nodownload">
+								<source th:src="@{${'http://localhost:8080/videos/'+channel.getVideoName()}}" type="video/mp4">
+							</video>
+						</div>
+						
+					</div>
+					<div class="col-4">
+						
+						<div style="width: 450px; height: 600px;">
+							<h5>Comments</h5>
+						<iframe th:src="@{${'/'+channel.getId()+'/comments'}}"
+							width="450px" height="550px"></iframe>
+					</div>
+						</div>
+						
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<script src="https://vjs.zencdn.net/8.3.0/video.min.js"></script>
+	
+</body>
+</html>

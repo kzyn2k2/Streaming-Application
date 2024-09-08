@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Watch</title>
+<link th:href="@{/resources/css/bootstrap.min.css}" rel="stylesheet">
+<link rel="stylesheet" th:href="@{/resources/css/all.css}">
+</head>
+<body>
+
+	<div class="container-fluid">
+			<nav th:replace="~{frag :: nav(name = ${u})}"></nav>
+		<div class="row">
+	
+			<h3 th:unless="${sports.isEmpty()}">Watch Now</h3>
+			<h3 th:if="${sports.isEmpty()}">There are No channels currently streaming</h3>
+			<div class="col-3" th:each="sport : ${sports}">
+				<div class="card shadow-lg">
+					<img th:src="@{${'/resources/images/'+sport.getImageName()+'.svg'}}" width="300px" height="300px" class="card-img-top">
+					<div class="card-body">
+						<h5 class="card-title" th:text="${sport.getName()}"></h5>
+						<a th:href="@{${'/'+sport.getId()+'/channels'}}" class="btn btn-primary">Check</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<link rel="stylesheet" th:href="@{/resources/css/bootstrap.min.css}" />
+	<link rel="stylesheet" th:href="@{/resources/css/all.css}">
+		<link rel="stylesheet" th:href="@{/resources/css/comments.css}">
+		<script type="text/javascript" th:src="@{/resources/js/jquery.min.js}"></script>
+</head>
+<body style="width: 400px;">
+	<div class="container-fluid comment-section">
+		
+		<div class="list-group-flush comments">
+			<div th:each="comment : ${comments}" class="list-group-item">
+						<p class="d-inline fw-bold" th:text="${comment.getUser().getAccountName()}"></p>
+						<p class="d-inline" th:text="${comment.getCommentText()}"></p>
+			</div>
+		</div>
+		<div class="comment-form-container">
+			<form th:action="@{${'/'+channel.getId()+'/addcomment'}}" method="post" th:object="${form}" class="fixed-bottom" style="margin-left: 50px;">
+			
+				<div class="row">
+					<div class="col-8">
+						
+						<div class="form-group">
+					<input class="form-control" type="text" placeholder="Comment.." th:field="*{commentText}">
+				</div>
+						
+					</div>
+					<div class="col-4">
+						
+				<div class="form-group">
+					<button type="submit" class="btn btn-warning"><i class="fa-regular fa-comment" style="font-size: 20px;"></i></button>
+				</div>
+						
+					</div>
+				</div>
+				
+				
+
+		</form>
+		</div>
+		
+	</div>
+	
+	<script type="text/javascript">
+	$(document).ready(function() {
+	    var formContainer = $(".comment-form-container");
+	    var commentsContainer = $(".comments");
+	    var commentsHeight = commentsContainer.outerHeight();
+
+	    $(window).scroll(function() {
+	      var scrollTop = $(window).scrollTop();
+	      var windowHeight = $(window).height();
+	      var formContainerHeight = formContainer.outerHeight();
+	      var maxScrollTop = commentsHeight - windowHeight + formContainerHeight;
+	      
+	      if (scrollTop >= maxScrollTop) {
+	        formContainer.css({
+	          position: "absolute",
+	          bottom: 0,
+	          top: "auto"
+	        });
+	      } else {
+	        formContainer.css({
+	          position: "fixed",
+	          bottom: 0,
+	          top: "auto"
+	        });
+	      }
+	    });
+	  });
+	</script>
+	
+</body>
+</html>

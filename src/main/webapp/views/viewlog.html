@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>View Log</title>
+<link th:href="@{/resources/css/bootstrap.min.css}" rel="stylesheet">
+<link rel="stylesheet" th:href="@{/resources/css/admin.css}" />
+<link rel="stylesheet" th:href="@{/resources/css/all.css}">
+</head>
+<body>
+<div class="container-fluid mt-3">
+	<div class="row">
+		<div class="col-2 d-flex justify-content-start">
+		<nav class="navbar text-center">
+			<div class="text-center">
+				<i class="fa-solid fa-user-gear" style="margin-left: 3px;"></i><h2 style="display: inline; margin-left: 5px;" class="navbar-brand">Admin</h2>
+			</div>
+			<br />
+			<ul class="nav navbar-nav">
+				<li class="nav-item">
+					<i class="fa-solid fa-futbol"></i>
+					 <a class="nav-link" th:href="@{/admin/sports}">Sports</a>
+				</li>
+				<li class="nav-item">
+							<i class="fa-solid fa-users-between-lines"></i>
+					<a class="nav-link" th:href="@{/admin/users}">Users</a>
+				</li>
+				
+			</ul>
+		</nav>
+	</div>
+		<div class="col-10">
+			<h5>View Log</h5>
+			<p th:text="${'The user '+user.getAccountName()+' viewed the '+channel.getName()+'channel on'}"></p>
+			
+			<table class="table" style="width: 400px;">
+				<thead>
+					<tr>
+						<th>Timestamps</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="vt : ${vts}">
+						<td th:text="${#temporals.format(vt.getViewedTime(), 'dd-MM-yyyy HH:mm')}"></td>
+					</tr>
+				</tbody>
+			</table>
+			
+		</div>
+	</div>
+</div>
+</body>
+</html>

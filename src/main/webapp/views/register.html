@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Register</title>
+<link th:href="@{/resources/css/bootstrap.min.css}" rel="stylesheet">
+<link th:href="@{/resources/css/auth.css}" rel="stylesheet">
+</head>
+<body>
+<div class="full">
+  <div class="row text-center">
+    <h4>Register</h4>
+  </div>
+        <div class="d-flex justify-content-center">
+      	<div class="row">
+    	      <div class="alert alert-danger " th:if="${param.error != null}" style="width: 300px">
+      			This email is already registered as an account!
+      </div>
+    </div>
+      </div>
+  <div class="d-flex justify-content-center">
+
+    <div class="row">
+      <form th:action="@{/auth/register}" th:object="${form}" method="post" class="needs-validation" novalidate onsubmit="verify()">
+      	<div class="form-group">
+      		<label class="form-label">Email</label>
+      		<input name="email" type="email" class="form-control" th:field="*{email}"/ required="required">
+      		<div class="invalid-feedback">
+      			Please enter valid email!
+      		</div>
+      	</div>
+      		<div class="form-group">
+      		<label class="form-label">Account Name</label>
+      		<input name="acname" type="text" class="form-control" th:field="*{accountName}" requ/>
+      		<div class="invalid-feedback">
+      			Account name cannot be empty!
+      		</div>
+      	</div>
+      	<div class="form-group">
+      		<label class="form-label">Password</label>
+      		<input id="pp" name="password" type="password" class="form-control" th:field="*{password}"/>
+      		<div class="invalid-feedback">
+      			Password must be at least 8 characters long!
+      		</div>
+      	</div>
+      	
+      	<div class="form-group">
+      		<label>Country</label>
+      		<select name="country" th:field="*{countryId}" class="form-select">
+      		<option th:each="country : ${countries}" th:text="${country.getName()}" th:value="${country.getId()}"></option>
+      		</select>
+      	</div>
+      	<div class="form-group text-center">
+      		<input type="submit" class="btn btn-primary" value="Register" />
+      	</div>
+      </form>
+      <div class="text-center">
+      	<a th:href="@{/auth/login}">Log In</a>
+      </div>
+      
+    </div>
+
+  </div>
+
+
+</div>
+
+
+<script type="text/javascript">
+
+(() => {
+    'use strict'
+
+    const forms = document.querySelectorAll('.needs-validation')
+
+    Array.from(forms).forEach(form => {
+      form.addEventListener('submit', event => {
+        if (!form.checkValidity()) {
+          event.preventDefault()
+          event.stopPropagation()
+        }
+
+        form.classList.add('was-validated')
+      }, false)
+    })
+  })()
+  
+  function verify() {
+    
+    const pp = document.getElementById("pp");
+    
+    if(pp.value.length < 8) {
+        pp.setCustomValidity("Invalid field.");
+    }
+    
+    if(pp.value.length >= 8) {
+        pp.setCustomValidity("");
+    }
+    
+    
+    }
+  </script>
+
+</body>
+</html>

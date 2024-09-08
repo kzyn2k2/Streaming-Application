@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Channels</title>
+<link rel="stylesheet" th:href="@{/resources/css/bootstrap.min.css}" />
+</head>
+<body>
+<div class="container-fluid  mt-3">
+	<nav th:replace="~{frag :: nav(name = ${u})}"></nav>
+	<div class="row">
+		<div class="col-6 ">
+
+			<h5>Available Channels</h5>
+			<div class="list-group">
+				
+				<a th:href="@{${'/channels/'+channel.getId()}}" class="list-group-item list-group-item-action list-group-item-light" th:each="channel : ${channels}">
+					
+						<div>
+						<div class="float-start">
+							<h4 th:text="${channel.getName()}"></h4>
+							<p th:text="${channel.getDescription()}"></p>
+						</div>
+							<span class="float-end">
+							<img th:src="@{${'/resources/images/'+channel.getSport().getImageName()+'.svg'}}" width="100px" height="100px"/>
+						</span>
+					</div>
+					
+				</a>
+			</div>
+		</div>
+		<div class="col-4">
+				<h3 th:text="${sport.getName()}"></h3>
+				<div>
+					<p th:text="${sport.getDescription()}"></p>
+				</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>

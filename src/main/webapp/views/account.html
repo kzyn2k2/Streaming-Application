@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Account</title>
+	<link th:href="@{/resources/css/bootstrap.min.css}" rel="stylesheet">
+</head>
+
+<body>
+	<div class="container-fluid mt-3">
+	<nav th:replace="~{frag :: nav(name = ${u})}"></nav>
+
+		<div class="row">
+			<div class="col">
+				<h3>Account</h3>
+							<a th:href="@{/reset}" class="btn btn-danger">Reset Password</a>
+							<br />
+					<ul class="list-group">
+				<li class="list-group-item">
+					<b>Email: </b><p th:text="${user.getEmail()}" style="display: inline;"></p>
+				</li>
+				<li class="list-group-item">
+					<b>Account Name: </b><p th:text="${user.getAccountName()}" style="display: inline;"></p>
+				</li>
+				<li class="list-group-item">
+					<b>Country: </b><p th:text="${user.getCountry().getName()}" style="display: inline;"></p>
+				</li>
+			</ul>
+			<table class="table table-borderless">
+				<thead>
+					<tr>
+						<th>Interested Sports</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="sport : ${sports}">
+						<td th:text="${sport.getName()}"></td>
+					</tr>
+				</tbody>
+			</table>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Reset Password</title>
+<link th:href="@{/resources/css/bootstrap.min.css}" rel="stylesheet">
+<link th:href="@{/resources/css/auth.css}" rel="stylesheet">
+</head>
+<body>
+<div class="full">
+  <div class="row text-center">
+    <h4>Reset Password</h4>
+  </div>
+            <div class="d-flex justify-content-center">
+      	<div class="row">
+    	      <div class="alert alert-danger " th:if="${param.error != null}" style="width: 250px">
+      		Incorrect Current Password!   	
+      </div>
+    </div>
+      </div>
+      
+  <div class="d-flex justify-content-center">
+    <div class="row">
+  
+      <form th:action="@{/reset}" method="post" class="needs-validation" novalidate onsubmit="verify()">
+      	<div class="form-group">
+      		<label class="form-label">Current Password</label>
+      		<input id="op" name="op" type="password" class="form-control">
+      	</div>
+      	<div class="form-group">
+      		<label class="form-label">New Password</label>
+      		<input id="pp" name="pp" type="password" class="form-control">
+      		<div class="invalid-feedback">
+      			Password do not match or is less than 8 characters!
+      		</div>
+      	</div>
+     	<div class="form-group">
+      		<label class="form-label">Confirm Password</label>
+      		<input id="cp" name="cp" type="password" class="form-control">
+      		<div class="invalid-feedback">
+      			Password do not match!
+      		</div>
+      	</div>
+      	<div class="form-group text-center">
+      		<input type="submit" class="btn btn-primary" />
+      	</div>
+      </form>
+    </div>
+
+  </div>
+
+
+</div>
+
+<script>
+	(() => {
+    'use strict'
+
+    const forms = document.querySelectorAll('.needs-validation')
+
+    Array.from(forms).forEach(form => {
+      form.addEventListener('submit', event => {
+        if (!form.checkValidity()) {
+          event.preventDefault()
+          event.stopPropagation()
+        }
+
+        form.classList.add('was-validated')
+      }, false)
+    })
+  })()
+  
+  function verify() {
+    
+    const pp = document.getElementById("pp");
+    const cp = document.getElementById("cp");
+    const op = document.getElementById("op");
+    
+
+    
+     if(pp.value.length < 8) {
+        pp.setCustomValidity("Invalid field.");
+    }
+    
+    if(pp.value.length >= 8) {
+        pp.setCustomValidity("");
+    }
+    
+    if(pp.value != cp.value) {
+        pp.setCustomValidity("Invalid field.");
+        cp.setCustomValidity("Invalid field.");
+    }
+    
+    if(pp.value == cp.value) {
+        pp.setCustomValidity("");
+        cp.setCustomValidity("");
+    }
+    
+    
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Sports List</title>
+<link th:href="@{/resources/css/bootstrap.min.css}" rel="stylesheet">
+<link rel="stylesheet" th:href="@{/resources/css/all.css}">
+<link rel="stylesheet" th:href="@{/resources/css/admin.css}">
+</head>
+<body>
+<div class="container-fluid mt-3">
+
+	<div class="row">
+	<div class="col-2 d-flex justify-content-start">
+		<nav class="navbar">
+			<div class="text-center">
+				<i class="fa-solid fa-user-gear" style="margin-left: 3px;"></i><h2 style="display: inline; margin-left: 5px;" class="navbar-brand">Admin</h2>
+			</div>
+			<br />
+			<ul class="nav navbar-nav">
+				<li class="nav-item">
+					<i class="fa-solid fa-futbol"></i>
+					 <a class="nav-link" th:href="@{/admin/sports}">Sports</a>
+				</li>
+				<li class="nav-item">
+							<i class="fa-solid fa-users-between-lines"></i>
+					<a class="nav-link" th:href="@{/admin/users}">Users</a>
+				</li>
+				
+			</ul>
+		</nav>
+	</div>
+	<div class="col-10">
+			<h3>Sports List</h3>
+		<div class="row">
+		<div class="col-4" th:each="sport : ${sports}">
+			<span class="float-start">
+				<img th:src="@{${'/resources/images/'+sport.getImageName()+'.svg'}}" alt="" height="60px" width="60px" />
+			</span>
+			<div class="float-end">
+				<p th:text="${sport.getName()}"></p>
+				
+				<a th:href="@{${'/admin/sports/'+sport.getId()}}" class="float-end" style="color:  #4B49AC;">
+					<i class="fa-solid fa-arrow-right"></i>
+				</a>
+			</div>
+		</div>
+	</div>
+	</div>
+	</div>
+	
+</div>
+</body>
+</html>

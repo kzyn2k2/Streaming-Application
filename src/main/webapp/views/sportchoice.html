@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link th:href="@{/resources/css/bootstrap.min.css}" rel="stylesheet">
+<title>Choose Sport</title>
+</head>
+<body>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col">
+			<div class="text-center">
+				<h3>Choose Your Interested Sport</h3>
+			</div>
+			<form th:action="@{${'/auth/'+id+'/sportchoice'}}" method="post" th:object="${form}">
+				<div class="row">
+					<div class="col-2" th:each="sport : ${sps}">
+						<div class="form-group">
+					<input type="checkbox"  th:text="${sport.getName()}" th:value="${sport.getId()}" th:field="*{sports}"/>
+				</div>
+					</div>
+				</div>
+				<br />
+				<div class="text-center">
+									<input type="submit" class="btn btn-primary" value="Select"/>
+				</div>
+
+			</form>
+		</div>
+	</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Sport</title>
+<link th:href="@{/resources/css/bootstrap.min.css}" rel="stylesheet">
+<link rel="stylesheet" th:href="@{/resources/css/all.css}">
+<link rel="stylesheet" th:href="@{/resources/css/admin.css}">
+</head>
+<body>
+<div class="container-fluid mt-3">
+	<div class="row">
+		<div class="col-2 d-flex justify-content-start">
+		<nav class="navbar">
+			<div class="text-center">
+				<i class="fa-solid fa-user-gear" style="margin-left: 3px;"></i><h2 style="display: inline; margin-left: 5px;" class="navbar-brand">Admin</h2>
+			</div>
+			<br />
+			<ul class="nav navbar-nav">
+				<li class="nav-item">
+					<i class="fa-solid fa-futbol"></i>
+					 <a class="nav-link" th:href="@{/admin/sports}">Sports</a>
+				</li>
+				<li class="nav-item">
+							<i class="fa-solid fa-users-between-lines"></i>
+					<a class="nav-link" th:href="@{/admin/users}">Users</a>
+				</li>
+				
+			</ul>
+		</nav>
+	</div>
+		<div class="col-8">
+			<h3 th:text="${sport.getName()}"></h3>
+			<a th:href="@{${'/admin/addchannel/'+sport.getId()}}" class="btn btn-primary">Add Channel</a>
+			
+			<div>
+				
+			<h3 th:text="${'View : '+view}"></h3>
+			</div>
+			
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Channel Name</th>
+						<th>Total Views</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="channel : ${channels}">
+						<td th:text="${channel.getName()}"></td>
+						<td th:text="${channel.getViews().size()}"></td>
+					</tr>
+				</tbody>
+			</table>
+			
+		</div>
+	</div>
+</div>
+</body>
+</html>
